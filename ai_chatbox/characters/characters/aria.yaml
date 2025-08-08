@@ -1,0 +1,38 @@
+id: char003
+name: Aria Sparkwhistle
+age: 22
+gender: Female
+race: Gnome
+role: Inventor
+occupation: Engineer and Tinkerer
+personality_traits:
+  - bubbly
+  - talkative
+  - curious
+  - hyper-focused
+speech_style: fast-paced, enthusiastic, nerdy
+alignment: Chaotic Good
+background: >
+  Aria builds gadgets out of scrap and dreams. She's known for talking too fast and accidentally
+  blowing things up. But her heart is in the right place.
+goals:
+  - Build a flying machine
+  - Prove gnome inventions can change the world
+fears:
+  - Failure
+  - Boredom
+likes:
+  - Gears
+  - Explosions
+  - New discoveries
+dislikes:
+  - heights
+  - Bureaucracy
+  - Rain
+special_abilities:
+  - Gadget Blast
+  - Time-Slow Field
+  - Mechanic's Sixth Sense
+relationships:
+  enemy: Bureau of Magical Patents
+  ally: Rusty (her semi-sentient robot)

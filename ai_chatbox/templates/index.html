@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI NPC Chat</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel&family=Quicksand&display=swap">
+  <style>
+    body {
+      background: linear-gradient(to right, #1f1f1f, #2a2a2a);
+      font-family: 'Quicksand', sans-serif;
+      color: #eee;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      color: #ff4c4c;
+      margin: 20px 0;
+    }
+
+    .wrapper {
+      display: flex;
+      width: 90%;
+      max-width: 1100px;
+      flex: 1;
+      gap: 20px;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: #2b2b2b;
+      border-radius: 12px;
+      padding: 20px;
+      border: 2px solid #444;
+      box-shadow: 0 0 12px rgba(255, 76, 76, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar select {
+      padding: 10px;
+      border-radius: 8px;
+      background: #222;
+      color: #fff;
+      border: none;
+      font-size: 1em;
+    }
+
+    .chat-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: rgba(34, 34, 34, 0.9);
+      padding: 20px;
+      border-radius: 12px;
+      border: 2px solid #444;
+      box-shadow: 0 0 12px rgba(255, 76, 76, 0.4);
+    }
+
+    #chat {
+      flex: 1;
+      overflow-y: auto;
+      border: 1px solid #333;
+      background: #121212;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      scroll-behavior: smooth;
+    }
+
+    .message {
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      max-width: 85%;
+    }
+
+    .user {
+      background-color: #4a4a4a;
+      align-self: flex-end;
+      margin-left: auto;
+    }
+
+    .bot {
+      background-color: #2e2e2e;
+      border-left: 4px solid #ff4c4c;
+      margin-right: auto;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    input[type="text"], button {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1em;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    button {
+      background-color: #ff4c4c;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e64444;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #555;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔥 NPC Character Chat</h1>
+  <div class="wrapper">
+    <div class="sidebar">
+      <label for="character">Choose Your NPC:</label>
+      <select id="character">
+        <option value="liora">Liora - Forest Guardian</option>
+        <option value="aria">Aria - Gnome Inventor</option>
+      </select>
+    </div>
+
+    <div class="chat-area">
+      <div id="chat"></div>
+      <div class="input-group">
+        <input type="text" id="user-input" placeholder="Ask something..." onkeydown="if(event.key==='Enter') sendMessage()">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById("user-input");
+      const message = input.value.trim();
+      const chat = document.getElementById("chat");
+      const character = document.getElementById("character").value;
+
+      if (!message) return;
+
+      const userDiv = document.createElement("div");
+      userDiv.className = "message user";
+      userDiv.textContent = "You: " + message;
+      chat.appendChild(userDiv);
+      chat.scrollTop = chat.scrollHeight;
+
+      input.value = "";
+
+      try {
+        const response = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message, character })
+        });
+
+        const data = await response.json();
+
+        const botDiv = document.createElement("div");
+        botDiv.className = "message bot";
+        botDiv.textContent = "Bot: " + data.response;
+        chat.appendChild(botDiv);
+        chat.scrollTop = chat.scrollHeight;
+
+      } catch (err) {
+        const errorDiv = document.createElement("div");
+        errorDiv.className = "message bot";
+        errorDiv.textContent = "Bot: Something went wrong!";
+        chat.appendChild(errorDiv);
+      }
+    }
+  </script>
+</body>
+</html>

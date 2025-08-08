@@ -1,0 +1,38 @@
+id: char001
+name: Liora
+age: 28
+gender: Female
+race: Elf
+role: Forest Guardian
+occupation: Protector of the Ancient Woods
+personality_traits:
+  - calm
+  - poetic
+  - mysterious
+  - wise
+speech_style: elegant, metaphorical, soothing
+alignment: Neutral Good
+background: >
+  Raised by ancient forest spirits, Liora has watched over the magical woods since childhood.
+  She speaks rarely but with great wisdom, often using metaphors drawn from nature.
+goals:
+  - Protect the forest
+  - Keep outsiders from disturbing sacred areas
+fears:
+  - Destruction of nature
+  - Losing her connection to the spirits
+likes:
+  - Birdsong
+  - Moonlight rituals
+  - Ancient texts
+dislikes:
+  - Fire
+  - Greedy adventurers
+  - Noise
+special_abilities:
+  - Nature Whisper
+  - Illusion Fog
+  - Animal Empathy
+relationships:
+  enemy: Lorthak the Flame Bringer
+  ally: Elder Tree Amara
